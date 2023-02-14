@@ -56,19 +56,24 @@ object Event {
 
                   for (singleMessage in message) {
                       if(singleMessage.contentToString().contains("点歌") || singleMessage.contentToString().contains("唱歌")){
-                          FileUtils.sendFileMessage("sanbing.amr",group)
                           val contentToString = singleMessage.contentToString()
                           val indexOf  = if (singleMessage.contentToString().contains("点歌")) {
                               contentToString.indexOf("点歌")
                           }else{
                               contentToString.indexOf("唱歌")
                           }
-
                           val id = contentToString.substring(indexOf+2).replace(" ","")
-                          val downloadMusic = DownloadUtil.downloadMusic(id)
-                          if (downloadMusic != null) {
+                          if (!id.matches(Regex("[0-9]+"))) return@subscribeAlways
+
+                          if (id.length >= 15 || id.length <= 5){
+                              group.sendMessage(PlainText("非法数据请求")+At(event.sender.id)+PlainText("傻逼!"))
+                              return@subscribeAlways
+                          }
+                          FileUtils.sendFileMessage("sanbing.amr",group)
+                          val downloadMusicId = DownloadUtil.downloadMusic(id)
+                          if (downloadMusicId != null) {
                               group.sendMessage("!!!侦测到在途的网易云音乐(仅支持手机QQ播放)")
-                              FileUtils.sendFileMessage(downloadMusic,group)
+                              FileUtils.sendFileMessage(downloadMusicId,group)
                           }
                           else{
                              group.sendMessage(At(event.sender.id)+PlainText("   音乐无法获取:检查ID是否存在 该音乐不可为VIP音乐(网易云音乐ID)"))
