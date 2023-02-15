@@ -13,5 +13,8 @@ object Config : AutoSavePluginConfig("config"){
     val MC_GROUP_QQ: Long by value(727572573L)
     val IMAGE_PATH: String by value("C:\\images\\")
     val AUDIO_PATH: String by value("C:\\audio\\")
-    val NOT_LISTEN_GROUP: List<Long> by value (listOf(874944256L))
+    val NOT_LISTEN_GROUP: List<Long> by value(listOf())
+    val ADMIN_QQ: List<Long> by value(listOf(2842775752L,1506301834L))
+    val MC_CONSOLE_IP: String by value("localhost")
+    val MC_CONSOLE_PORT: Int by value(16500)
 }

@@ -24,7 +24,7 @@ object MusicEvent {
             for (singleMessage in message) {
                 if(singleMessage.contentToString().contains("点歌") || singleMessage.contentToString().contains("唱歌")){
                     val contentToString = singleMessage.contentToString()
-                    val indexOf  = if (singleMessage.contentToString().contains("点歌")) {
+                    val indexOf  = if (contentToString.contains("点歌")) {
                         contentToString.indexOf("点歌")
                     }else{
                         contentToString.indexOf("唱歌")

@@ -2,6 +2,7 @@ package com.example
 
 
 import com.example.listen.Event
+import com.example.listen.McCommandEvent
 import com.example.listen.MusicEvent
 import com.example.utils.FileUtil
 import kotlinx.coroutines.delay
@@ -19,7 +20,7 @@ import kotlin.random.Random
 
 object PluginMain : KotlinPlugin(
     JvmPluginDescription(
-        id = "cn.luorenmu.demo",
+        id = "cn.luorenmu.LomuBot",
         name = "LomuBot",
         version = "0.1.0",
     ) {
@@ -30,6 +31,7 @@ object PluginMain : KotlinPlugin(
     override fun onEnable() {
         logger.info { "LomuBot Plugin loaded" }
         reloadPluginConfig(Config)
+        McCommandEvent.listenForMcCommand()
         MusicEvent.listenForMusicEvent()
         Event.groupEvent()
         launch {

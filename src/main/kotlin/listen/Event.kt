@@ -44,12 +44,12 @@ object Event {
                   }
 
                   if (message.contentToString().contains("早上好")){
-                          FileUtil.sendFileMessage("C:\\Images\\03.amr",group)
+                          FileUtil.sendFileMessage("03.amr",group)
 
                   }
 
                   if(message.contentToString().contains("点歌 安瀬聖-陽炎")){
-                       FileUtil.sendFileMessage("C:\\Images\\安瀬聖-陽炎.amr",group)
+                       FileUtil.sendFileMessage("安瀬聖-陽炎.amr",group)
                   }
 
 
@@ -70,7 +70,7 @@ object Event {
                           val timeInt = newTime - timeFlag
                           //更新时间
                           timeFlag = newTime
-                          if (timeInt > 10_000) {
+                          if (timeInt > 100_000) {
                               group.sendMessage(PlainText("服主,垃圾服务器又炸咯")+ At(1506301834)+Face(Face.擦汗))
                           }
                       }

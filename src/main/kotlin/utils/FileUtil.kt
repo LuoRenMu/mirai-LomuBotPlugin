@@ -47,14 +47,14 @@ object FileUtil {
             file =  getAudioPath(fileName)
             fileType = MUSIC
         } else {
-            group.sendMessage(PlainText("内部发生错误 Data\n fileName:$fileName\n"))
+            group.sendMessage(PlainText("007-Error:内部发生错误 Data\n fileName:$fileName\n"))
             return false
         }
         val bufferedInputStream: BufferedInputStream
         try {
              bufferedInputStream = file.toBufferedInputStream()
         }catch (e: Exception){
-            group.sendMessage("内部发送错误")
+            group.sendMessage("007-Error:内部发生错误")
             e.printStackTrace()
             return false
         }
