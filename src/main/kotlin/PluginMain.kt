@@ -1,7 +1,9 @@
 package com.example
 
 
-import com.example.utils.FileUtils
+import com.example.listen.Event
+import com.example.listen.MusicEvent
+import com.example.utils.FileUtil
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import net.mamoe.mirai.Bot
@@ -9,6 +11,7 @@ import net.mamoe.mirai.Bot
 
 import net.mamoe.mirai.console.plugin.jvm.JvmPluginDescription
 import net.mamoe.mirai.console.plugin.jvm.KotlinPlugin
+import net.mamoe.mirai.console.plugin.jvm.reloadPluginConfig
 
 import net.mamoe.mirai.message.data.*
 import net.mamoe.mirai.utils.info
@@ -26,6 +29,8 @@ object PluginMain : KotlinPlugin(
 
     override fun onEnable() {
         logger.info { "LomuBot Plugin loaded" }
+        reloadPluginConfig(Config)
+        MusicEvent.listenForMusicEvent()
         Event.groupEvent()
         launch {
             while (true) {
@@ -51,12 +56,12 @@ object PluginMain : KotlinPlugin(
 
                             3 -> {
                                 group.sendMessage(At(1506301834))
-                                FileUtils.sendFileMessage("2023-2121504.jpg",group)
+                                FileUtil.sendFileMessage("2023-2121504.jpg",group)
                             }
 
                             4 -> {
                                 group.sendMessage(At(3523227924))
-                                FileUtils.sendFileMessage("20230212192019.jpg",group)
+                                FileUtil.sendFileMessage("20230212192019.jpg",group)
                             }
 
                             5 -> {
@@ -70,17 +75,17 @@ object PluginMain : KotlinPlugin(
                     }
 
 
-                    3 -> FileUtils.sendFileMessage("20230212191534.gif",group)
+                    3 -> FileUtil.sendFileMessage("20230212191534.gif",group)
                     4 -> {
                         group.sendMessage(At(randomMember.id) + PlainText("少年,你渴望力量吗"))
-                        FileUtils.sendFileMessage("20230212191842.png",group)
+                        FileUtil.sendFileMessage("20230212191842.png",group)
                     }
 
-                    5 -> FileUtils.sendFileMessage("20230212224001.gif",group)
-                    6 -> FileUtils.sendFileMessage("20230212230700.gif",group)
-                    7 -> FileUtils.sendFileMessage("20230212230829.gif",group)
-                    8 -> FileUtils.sendFileMessage("20230212230910.gif",group)
-                    9 -> FileUtils.sendFileMessage("20230212231005.gif",group)
+                    5 -> FileUtil.sendFileMessage("20230212224001.gif",group)
+                    6 -> FileUtil.sendFileMessage("20230212230700.gif",group)
+                    7 -> FileUtil.sendFileMessage("20230212230829.gif",group)
+                    8 -> FileUtil.sendFileMessage("20230212230910.gif",group)
+                    9 -> FileUtil.sendFileMessage("20230212231005.gif",group)
                 }
             }
 

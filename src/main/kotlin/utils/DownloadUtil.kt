@@ -20,14 +20,14 @@ object DownloadUtil {
 
     private fun getMusicPath(id: String) = "${Config.AUDIO_PATH}$id.mp3"
 
-    fun downloadMusic(id: String): String? {
-        if (File("C:\\Images\\$id.mp3").exists()){
+    fun downloadMusicId(id: String): String? {
+        if (File(getMusicPath(id)).exists()){
             return "$id.mp3"
         }
          val url = URL(getMusicUrl(id))
          val openConnection = url.openConnection()
          val inputStream = openConnection.getInputStream()
-         val fileOutputStream = FileOutputStream("C:\\Images\\$id.mp3")
+         val fileOutputStream = FileOutputStream(getMusicPath(id))
 
          fileOutputStream.write(inputStream.readBytes())
          fileOutputStream.flush()
@@ -35,7 +35,7 @@ object DownloadUtil {
          fileOutputStream.close()
 
 
-        val file = File("C:\\Images\\$id.mp3")
+        val file = File(getMusicPath(id))
         if (Files.size(file.toPath()) < 10){
             println(Files.size(file.toPath()))
             file.delete()

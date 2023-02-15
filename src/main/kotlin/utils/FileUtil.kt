@@ -18,7 +18,7 @@ import java.io.File
  *    @author LoMu
  *    Date  2023-02-12 19:45
  */
-object FileUtils {
+object FileUtil {
 
     private fun getImagePath(imageName: String) = File("${Config.IMAGE_PATH}$imageName")
 
