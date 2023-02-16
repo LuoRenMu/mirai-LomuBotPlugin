@@ -18,13 +18,20 @@ object McCommandEvent {
       val channel = GlobalEventChannel.filter { it is MessageEvent && Config.ADMIN_QQ.contains(it.sender.id) && it.message.contentToString().startsWith("执行命令") }
         channel.subscribeAlways<MessageEvent>{event ->
             val message = event.message
-            val sendAdminCommand = SocketConsoleClient.sendAdminCommand(message.contentToString().replace("执行命令",""))
+            var sendAdminCommand: String? = null
+            sender.sendMessage("命令已接收,正在执行...")
+            try {
+                sendAdminCommand = SocketConsoleClient.sendAdminCommand(message.contentToString().replace("执行命令",""))
+            }catch (e: ExceptionInInitializerError){
+                event.sender.sendMessage("与服务器的远程连接发生错误")
+            }
+
 
             if(event is GroupMessageEvent) {
                 event.group.sendMessage(At(event.sender.id)+PlainText("命令已执行"))
-                if (sendAdminCommand != null) {
-                    sender.sendMessage(sendAdminCommand)
-                }
+            }
+            if (sendAdminCommand != null) {
+                sender.sendMessage(sendAdminCommand)
             }
 
         }

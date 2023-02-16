@@ -22,7 +22,7 @@ object MusicEvent {
         channel.subscribeAlways<GroupMessageEvent>{ event ->
             val message = event.message
             for (singleMessage in message) {
-                if(singleMessage.contentToString().contains("点歌") || singleMessage.contentToString().contains("唱歌")){
+                if(singleMessage.contentToString().startsWith("点歌") || singleMessage.contentToString().startsWith("唱歌")){
                     val contentToString = singleMessage.contentToString()
                     val indexOf  = if (contentToString.contains("点歌")) {
                         contentToString.indexOf("点歌")
@@ -32,7 +32,7 @@ object MusicEvent {
                     val id = contentToString.substring(indexOf+2).replace(" ","")
                     if (!id.matches(Regex("[0-9]+"))) return@subscribeAlways
 
-                    if (id.length >= 15 || id.length <= 5){
+                    if (id.length >= 10 || id.length < 4){
                         group.sendMessage(PlainText("非法数据请求 ") + At(event.sender.id) + PlainText(" 傻逼!"))
                         return@subscribeAlways
                     }

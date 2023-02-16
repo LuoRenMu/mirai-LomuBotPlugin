@@ -17,7 +17,7 @@ object SocketConsoleClient {
 
     fun sendAdminCommand(message: String): String? {
         writeLine(message)
-        val timeOut  = System.currentTimeMillis() + 10_000
+        val timeOut  = System.currentTimeMillis() + 3_000
         while (true) {
             if (reader.ready() && reader.readLine() != null) {
                 return reader.readLine()
@@ -31,6 +31,12 @@ object SocketConsoleClient {
     private fun writeLine(str: String) {
         writer.write(str+"\n")
         writer.flush()
+    }
+
+    fun stop(){
+        socket.close()
+        writer.close()
+        reader.close()
     }
 
 }

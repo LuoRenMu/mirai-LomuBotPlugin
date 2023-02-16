@@ -4,6 +4,7 @@ package com.example
 import com.example.listen.Event
 import com.example.listen.McCommandEvent
 import com.example.listen.MusicEvent
+import com.example.socket.SocketConsoleClient
 import com.example.utils.FileUtil
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -89,9 +90,15 @@ object PluginMain : KotlinPlugin(
                     8 -> FileUtil.sendFileMessage("20230212230910.gif",group)
                     9 -> FileUtil.sendFileMessage("20230212231005.gif",group)
                 }
+
+
             }
 
         }
+    }
+
+    override fun onDisable() {
+        SocketConsoleClient.stop()
     }
 }
 
